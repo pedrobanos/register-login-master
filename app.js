@@ -3,7 +3,9 @@ const express = require('express');
 const logger = require('morgan');
 const hbs = require('hbs')
 
+
 const app = express();
+
 
 require('./config/db.config');
 app.use(logger('dev'));
@@ -15,6 +17,9 @@ hbs.registerPartials(__dirname + "/views/partials");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+const { sessionConfig } = require('./config/session.config');
+// app.use(sessionConfig)
 
 const routes = require('./config/routes.config');
 app.use('/', routes);

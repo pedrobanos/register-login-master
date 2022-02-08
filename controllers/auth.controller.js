@@ -33,11 +33,35 @@ module.exports.doRegister = (req, res, next) => {
 }
 
 module.exports.login = (req, res, next) => {
-  // pintar vista de login
+  res.render('auth/login')
 }
 
 module.exports.doLogin = (req, res, next) => {
 
+  const { email, password } = req.body;
+  if (email === '' || password === '') {
+    res.render('auth/login', {
+      errors: 'invalid email or password'
+    });
+  }
+
+  User.findOne({ email })
+    .then(user => {
+      console.log(user)
+      if (!user) {
+        res.render('auth/login', { errors: 'invalid email or password' });
+      } else {
+        return user.checkPassword(password)
+          .then(match => {
+            if (!match) {
+              res.render('auth/login', { errors: 'invalid email or password' });
+            } else {
+              res.redirect('/profile')
+            }
+          })
+        }
+      })
+    .catch(error => (next(error)))
 }
 
 
