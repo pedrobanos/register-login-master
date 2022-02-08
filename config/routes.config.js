@@ -13,7 +13,6 @@ router.get('/register', auth.register)
 router.post('/register', auth.doRegister)
 router.get('/login', auth.login)
 router.post('/login', auth.doLogin)
-
 router.get('/profile', user.profile)
 
 module.exports = router;

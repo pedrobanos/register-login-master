@@ -7,9 +7,16 @@ const PASSWORD_PATTERN = /^.{8,}$/i
 const SALT_ROUNDS = 10
 
 const userSchema = new Schema({
-  name: {
+  userName: {
     type: String,
     required: [true, 'Name is required']
+  },
+  fullname: {
+    type: String,
+    required: [true, 'Fullname is required']
+  },
+  address: {
+    type: String,
   },
   email: {
     type: String,
